@@ -5,7 +5,7 @@ class AppDelegate < PM::Delegate
 
   def on_load(app, options)
     cdq.setup
-    open HomeScreen.new(nav_bar: true)
+    open Home2Screen.new(nav_bar: true)
   end
 
   # Remove this if you are only supporting portrait

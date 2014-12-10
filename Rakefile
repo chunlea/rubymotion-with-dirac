@@ -43,10 +43,13 @@ Motion::Project::App.setup do |app|
   #
   # app.fonts = ['Oswald-Regular.ttf', 'FontAwesome.otf'] # These go in /resources
   # app.frameworks += %w(QuartzCore CoreGraphics MediaPlayer MessageUI CoreData)
+  app.frameworks += %w(Accelerate AudioToolbox CoreAudio MediaPlayer AVFoundation CoreMedia)
   #
   # app.vendor_project('vendor/Flurry', :static)
   # app.vendor_project('vendor/DSLCalendarView', :static, :cflags => '-fobjc-arc') # Using arc
-  #
+  app.vendor_project('vendor/Dirac3/', :static,
+      :products => ['libDIRAC_iOS-fat.a']) # Directory with .h files relative to vendor/PROJECT-NAME)
+
   # app.pods do
   #   pod 'AFNetworking'
   #   pod 'JGProgressHUD'

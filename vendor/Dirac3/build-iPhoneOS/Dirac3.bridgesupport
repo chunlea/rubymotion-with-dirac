@@ -1,0 +1,688 @@
+<?xml version='1.0'?>
+<signatures version='1.0'>
+<enum name='kAudioBufferNumFrames' value='8192'/>
+<enum name='kDiracErrorCacheErr' value='-4'/>
+<enum name='kDiracErrorDemoTimeoutReached' value='-10001'/>
+<enum name='kDiracErrorFeatureNotSupported' value='-7'/>
+<enum name='kDiracErrorInvalidCb' value='-3'/>
+<enum name='kDiracErrorMemErr' value='-108'/>
+<enum name='kDiracErrorMultipleInits' value='-6'/>
+<enum name='kDiracErrorNoErr' value='0'/>
+<enum name='kDiracErrorNotInited' value='-5'/>
+<enum name='kDiracErrorNumErrs' value='-10000'/>
+<enum name='kDiracErrorParamErr' value='-1'/>
+<enum name='kDiracErrorUnknownErr' value='-2'/>
+<enum name='kDiracLambda1' value='201'/>
+<enum name='kDiracLambda2' value='202'/>
+<enum name='kDiracLambda3' value='203'/>
+<enum name='kDiracLambda4' value='204'/>
+<enum name='kDiracLambda5' value='205'/>
+<enum name='kDiracLambdaPreview' value='200'/>
+<enum name='kDiracLambdaTranscribe' value='206'/>
+<enum name='kDiracPropertyCacheGranularity' value='104'/>
+<enum name='kDiracPropertyCacheMaxSizeFrames' value='105'/>
+<enum name='kDiracPropertyCacheNumFramesLeftInCache' value='106'/>
+<enum name='kDiracPropertyCompactSupport' value='103'/>
+<enum name='kDiracPropertyDoPitchCorrection' value='108'/>
+<enum name='kDiracPropertyFormantFactor' value='102'/>
+<enum name='kDiracPropertyNumLambdas' value='207'/>
+<enum name='kDiracPropertyNumProperties' value='502'/>
+<enum name='kDiracPropertyNumQualities' value='304'/>
+<enum name='kDiracPropertyOutputGainDb' value='109'/>
+<enum name='kDiracPropertyPitchCorrectionBasicTuningHz' value='400'/>
+<enum name='kDiracPropertyPitchCorrectionDoFormantCorrection' value='500'/>
+<enum name='kDiracPropertyPitchCorrectionFundamentalFrequency' value='501'/>
+<enum name='kDiracPropertyPitchCorrectionSlurTime' value='401'/>
+<enum name='kDiracPropertyPitchFactor' value='100'/>
+<enum name='kDiracPropertyTimeFactor' value='101'/>
+<enum name='kDiracPropertyUseConstantCpuPitchShift' value='107'/>
+<enum name='kDiracQualityBest' value='303'/>
+<enum name='kDiracQualityBetter' value='302'/>
+<enum name='kDiracQualityGood' value='301'/>
+<enum name='kDiracQualityPreview' value='300'/>
+<enum name='kInputBus' value='1'/>
+<enum name='kOutputBus' value='0'/>
+<enum name='kOversample' value='1'/>
+<function name='AllocateAudioBuffer'>
+<arg declared_type='int' name='numChannels' type='i'/>
+<arg declared_type='int' name='numFrames' type='i'/>
+<retval declared_type='float**' type='^^f'/>
+</function>
+<function name='AllocateAudioBufferSInt16'>
+<arg declared_type='int' name='numChannels' type='i'/>
+<arg declared_type='int' name='numFrames' type='i'/>
+<retval declared_type='SInt16**' type='^^s'/>
+</function>
+<function name='ClearAudioBuffer'>
+<arg declared_type='float**' name='audio' type='^^f'/>
+<arg declared_type='long' name='numChannels' type='l' type64='q'/>
+<arg declared_type='long' name='numFrames' type='l' type64='q'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DeallocateAudioBuffer'>
+<arg declared_type='SInt16**' name='audio' type='^^s'/>
+<arg declared_type='int' name='numChannels' type='i'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracClockTimeSeconds'>
+<retval declared_type='long double' type='d'/>
+</function>
+<function name='DiracCreate'>
+<arg declared_type='long' name='lambda' type='l' type64='q'/>
+<arg declared_type='long' name='quality' type='l' type64='q'/>
+<arg declared_type='long' name='numChannels' type='l' type64='q'/>
+<arg declared_type='float' name='sampleRateHz' type='f'/>
+<arg declared_type='long (*)(float **, long, void *)' function_pointer='true' name='readFromChannelsCallback' type='^?'>
+<arg declared_type='float**' type='^^f'/>
+<arg declared_type='long' type='l' type64='q'/>
+<arg declared_type='void*' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</arg>
+<arg declared_type='void*' name='userData' type='^v'/>
+<retval declared_type='void*' type='^v'/>
+</function>
+<function name='DiracCreateInterleaved'>
+<arg declared_type='long' name='lambda' type='l' type64='q'/>
+<arg declared_type='long' name='quality' type='l' type64='q'/>
+<arg declared_type='long' name='numChannels' type='l' type64='q'/>
+<arg declared_type='float' name='sampleRateHz' type='f'/>
+<arg declared_type='long (*)(float *, long, void *)' function_pointer='true' name='readFromInterleavedChannelsCallback' type='^?'>
+<arg declared_type='float*' type='^f'/>
+<arg declared_type='long' type='l' type64='q'/>
+<arg declared_type='void*' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</arg>
+<arg declared_type='void*' name='userData' type='^v'/>
+<retval declared_type='void*' type='^v'/>
+</function>
+<function name='DiracDestroy'>
+<arg declared_type='void*' name='dirac' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracErrorToString'>
+<arg declared_type='long' name='error' type='l' type64='q'/>
+<retval const='true' declared_type='char*' type='*'/>
+</function>
+<function name='DiracFxCreate'>
+<arg declared_type='long' name='quality' type='l' type64='q'/>
+<arg declared_type='float' name='sampleRateHz' type='f'/>
+<arg declared_type='long' name='numChannels' type='l' type64='q'/>
+<retval declared_type='void*' type='^v'/>
+</function>
+<function name='DiracFxDestroy'>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracFxLatencyFrames'>
+<arg declared_type='float' name='sampleRateHz' type='f'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracFxMaxOutputBufferFramesRequired'>
+<arg declared_type='long double' name='timeFactor' type='d'/>
+<arg declared_type='long double' name='pitchFactor' type='d'/>
+<arg declared_type='long' name='numInputFrames' type='l' type64='q'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracFxOutputBufferFramesRequiredNextCall'>
+<arg declared_type='long double' name='timeFactor' type='d'/>
+<arg declared_type='long double' name='pitchFactor' type='d'/>
+<arg declared_type='long' name='numInputFrames' type='l' type64='q'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracFxProcess'>
+<arg declared_type='long double' name='timeFactor' type='d'/>
+<arg declared_type='long double' name='pitchFactor' type='d'/>
+<arg declared_type='short**' name='indata' type='^^s'/>
+<arg declared_type='short**' name='outdata' type='^^s'/>
+<arg declared_type='long' name='numInputFrames' type='l' type64='q'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracFxProcessFloat'>
+<arg declared_type='long double' name='timeFactor' type='d'/>
+<arg declared_type='long double' name='pitchFactor' type='d'/>
+<arg declared_type='float**' name='indata' type='^^f'/>
+<arg declared_type='float**' name='outdata' type='^^f'/>
+<arg declared_type='long' name='numInputFrames' type='l' type64='q'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracFxProcessFloatInterleaved'>
+<arg declared_type='long double' name='timeFactor' type='d'/>
+<arg declared_type='long double' name='pitchFactor' type='d'/>
+<arg declared_type='float*' name='indata' type='^f'/>
+<arg declared_type='float*' name='outdata' type='^f'/>
+<arg declared_type='long' name='numInputFrames' type='l' type64='q'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracFxProcessInterleaved'>
+<arg declared_type='long double' name='timeFactor' type='d'/>
+<arg declared_type='long double' name='pitchFactor' type='d'/>
+<arg declared_type='short*' name='indata' type='^s'/>
+<arg declared_type='short*' name='outdata' type='^s'/>
+<arg declared_type='long' name='numInputFrames' type='l' type64='q'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracFxReset'>
+<arg declared_type='_Bool' name='clear' type='B'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracGetProperty'>
+<arg declared_type='long' name='selector' type='l' type64='q'/>
+<arg declared_type='void*' name='dirac' type='^v'/>
+<retval declared_type='long double' type='d'/>
+</function>
+<function name='DiracPeakCpuUsagePercent'>
+<arg declared_type='void*' name='dirac' type='^v'/>
+<retval declared_type='float' type='f'/>
+</function>
+<function name='DiracPrintSettings'>
+<arg declared_type='void*' name='dirac' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracProcess'>
+<arg declared_type='float**' name='audioOut' type='^^f'/>
+<arg declared_type='long' name='numFrames' type='l' type64='q'/>
+<arg declared_type='void*' name='dirac' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracProcessInterleaved'>
+<arg declared_type='float*' name='audioOut' type='^f'/>
+<arg declared_type='long' name='numFrames' type='l' type64='q'/>
+<arg declared_type='void*' name='dirac' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracReset'>
+<arg declared_type='_Bool' name='clear' type='B'/>
+<arg declared_type='void*' name='dirac' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracRetuneCreate'>
+<arg declared_type='long' name='quality' type='l' type64='q'/>
+<arg declared_type='float' name='sampleRateHz' type='f'/>
+<arg declared_type='float' name='referenceTuningHz' type='f'/>
+<retval declared_type='void*' type='^v'/>
+</function>
+<function name='DiracRetuneDestroy'>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracRetuneGetAllowedKeysMask'>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='unsigned long' type='L' type64='Q'/>
+</function>
+<function name='DiracRetuneGetClosestKey'>
+<arg declared_type='_Bool' name='respectKeyState' type='B'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracRetuneGetClosestKeyDetuneCent'>
+<arg declared_type='_Bool' name='respectKeyState' type='B'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='float' type='f'/>
+</function>
+<function name='DiracRetuneGetKeyStatus'>
+<arg declared_type='long' name='keyNo' type='l' type64='q'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='_Bool' type='B'/>
+</function>
+<function name='DiracRetuneGetPitchHz'>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='float' type='f'/>
+</function>
+<function name='DiracRetuneLatencyFrames'>
+<arg declared_type='float' name='sampleRateHz' type='f'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracRetunePrintInternalTuningTable'>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracRetuneProcess'>
+<arg declared_type='short*' name='indata' type='^s'/>
+<arg declared_type='short*' name='outdata' type='^s'/>
+<arg declared_type='long' name='numSampsToProcess' type='l' type64='q'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracRetuneProcessFloat'>
+<arg declared_type='float*' name='indata' type='^f'/>
+<arg declared_type='float*' name='outdata' type='^f'/>
+<arg declared_type='long' name='numSampsToProcess' type='l' type64='q'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracRetuneSetAllowedKeysMask'>
+<arg declared_type='unsigned long' name='mask' type='L' type64='Q'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracRetuneSetKeyList'>
+<arg declared_type='float*' name='tuningCentRelativeToKey0' type='^f'/>
+<arg declared_type='long' name='numKeysPerOctave' type='l' type64='q'/>
+<arg declared_type='long' name='octaveOffsetKeyNo' type='l' type64='q'/>
+<arg declared_type='void*' name='diracRetune' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracRetuneSetKeyStatus'>
+<arg declared_type='long' name='keyNo' type='l' type64='q'/>
+<arg declared_type='_Bool' name='enable' type='B'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracRetuneSetPitchHz'>
+<arg declared_type='float' name='pitchHz' type='f'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracRetuneSetProperties'>
+<arg declared_type='float' name='correctionAmountPercent' type='f'/>
+<arg declared_type='float' name='correctionCaptureCent' type='f'/>
+<arg declared_type='float' name='correctionAutoBypassThreshold' type='f'/>
+<arg declared_type='float' name='correctionAmbienceThreshold' type='f'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracRetuneSetTuningReferenceHz'>
+<arg declared_type='float' name='referenceTuningHz' type='f'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracRetuneSetTuningTable'>
+<arg declared_type='float*' name='frequencyTable' type='^f'/>
+<arg declared_type='long' name='numFrequencies' type='l' type64='q'/>
+<arg declared_type='void*' name='instance' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracSetProcessingBeganCallback'>
+<arg declared_type='void (*)(unsigned long, void *)' function_pointer='true' name='processingCallback' type='^?'>
+<arg declared_type='unsigned long' type='L' type64='Q'/>
+<arg declared_type='void*' type='^v'/>
+<retval declared_type='void' type='v'/>
+</arg>
+<arg declared_type='void*' name='userData' type='^v'/>
+<arg declared_type='void*' name='dirac' type='^v'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracSetProperty'>
+<arg declared_type='long' name='selector' type='l' type64='q'/>
+<arg declared_type='long double' name='value' type='d'/>
+<arg declared_type='void*' name='dirac' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracSetTuningTable'>
+<arg declared_type='float*' name='frequencyTable' type='^f'/>
+<arg declared_type='long' name='numFrequencies' type='l' type64='q'/>
+<arg declared_type='void*' name='dirac' type='^v'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<function name='DiracStartClock'>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='DiracValidateStretchFactor'>
+<arg declared_type='long double' name='factor' type='d'/>
+<retval declared_type='long double' type='d'/>
+</function>
+<function name='DiracVersion'>
+<retval const='true' declared_type='char*' type='*'/>
+</function>
+<function name='arc_release'>
+<arg declared_type='id' name='a' type='@'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='arc_retain'>
+<arg declared_type='id' name='a' type='@'/>
+<retval declared_type='id' type='@'/>
+</function>
+<function name='checkStatus'>
+<arg declared_type='int' name='status' type='i'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='wrappedDiff'>
+<arg declared_type='long' name='in1' type='l' type64='q'/>
+<arg declared_type='long' name='in2' type='l' type64='q'/>
+<arg declared_type='long' name='wrap' type='l' type64='q'/>
+<retval declared_type='long' type='l' type64='q'/>
+</function>
+<class name='DiracAudioPlayer'>
+<method selector='changeDuration:'>
+<arg declared_type='float' index='0' name='duration' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='changePitch:'>
+<arg declared_type='float' index='0' name='pitch' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='loopBack'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='processAudioThread:'>
+<arg declared_type='id' index='0' name='param' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='resetProcessing:'>
+<arg declared_type='SInt64' index='0' name='position' type='q'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='DiracAudioPlayerBase'>
+<method selector='HandleDemoTimeout:'>
+<arg declared_type='id' index='0' name='param' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='changeDuration:'>
+<arg declared_type='float' index='0' name='duration' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='changePitch:'>
+<arg declared_type='float' index='0' name='pitch' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='currentTime'>
+<retval declared_type='NSTimeInterval' type='d'/>
+</method>
+<method selector='dealloc'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='delegate'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='fileDuration'>
+<retval declared_type='NSTimeInterval' type='d'/>
+</method>
+<method selector='initWithContentsOfURL:channels:error:'>
+<arg declared_type='NSURL*' index='0' name='inUrl' type='@'/>
+<arg declared_type='int' index='1' name='channels' type='i'/>
+<arg declared_type='NSError**' index='2' name='error' type='^@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='mAudioBuffer'>
+<retval declared_type='SInt16**' type='^^s'/>
+</method>
+<method selector='mAudioBufferReadPos'>
+<retval declared_type='long' type='l' type64='q'/>
+</method>
+<method selector='mAudioBufferWritePos'>
+<retval declared_type='long' type='l' type64='q'/>
+</method>
+<method selector='mAudioUnit'>
+<retval declared_type='AudioComponentInstance' type='^{OpaqueAudioComponentInstance=}'/>
+</method>
+<method selector='mDirac'>
+<retval declared_type='void*' type='^v'/>
+</method>
+<method selector='mFramePositionInInputFile'>
+<retval declared_type='SInt64' type='q'/>
+</method>
+<method selector='mIsPrepared'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='mIsProcessing'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='mLastResetPositionInFile'>
+<retval declared_type='SInt64' type='q'/>
+</method>
+<method selector='mLoopCount'>
+<retval declared_type='int' type='i'/>
+</method>
+<method selector='mNumChannels'>
+<retval declared_type='int' type='i'/>
+</method>
+<method selector='mNumberOfLoops'>
+<retval declared_type='int' type='i'/>
+</method>
+<method selector='mPeak'>
+<retval declared_type='SInt16*' type='^s'/>
+</method>
+<method selector='mReader'>
+<retval declared_type='EAFRead*' type='@'/>
+</method>
+<method selector='mTotalFramesConsumed'>
+<retval declared_type='SInt64' type='q'/>
+</method>
+<method selector='mTotalFramesGenerated'>
+<retval declared_type='SInt64' type='q'/>
+</method>
+<method selector='mTotalFramesInFile'>
+<retval declared_type='UInt64' type='Q'/>
+</method>
+<method selector='mTotalFramesPlayed'>
+<retval declared_type='SInt64' type='q'/>
+</method>
+<method selector='mVolume'>
+<retval declared_type='float' type='f'/>
+</method>
+<method selector='notifyDelegateDidFinishPlaying:successfully:'>
+<arg declared_type='DiracAudioPlayerBase*' index='0' name='player' type='@'/>
+<arg declared_type='BOOL' index='1' name='flag' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='numberOfChannels'>
+<retval declared_type='NSUInteger' type='I' type64='Q'/>
+</method>
+<method selector='numberOfLoops'>
+<retval declared_type='NSInteger' type='i' type64='q'/>
+</method>
+<method selector='pause'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='peakPowerForChannel:'>
+<arg declared_type='NSUInteger' index='0' name='channelNumber' type='I' type64='Q'/>
+<retval declared_type='float' type='f'/>
+</method>
+<method selector='play'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='playing'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='prepareToPlay'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='processAudioThread:'>
+<arg declared_type='id' index='0' name='param' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='resetProcessing:'>
+<arg declared_type='SInt64' index='0' name='position' type='q'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setCurrentTime:'>
+<arg declared_type='NSTimeInterval' index='0' name='time' type='d'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setDelegate:'>
+<arg declared_type='id' index='0' name='delegate' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMAudioBufferReadPos:'>
+<arg declared_type='long' index='0' name='mAudioBufferReadPos' type='l' type64='q'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMFramePositionInInputFile:'>
+<arg declared_type='SInt64' index='0' name='mFramePositionInInputFile' type='q'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMLastResetPositionInFile:'>
+<arg declared_type='SInt64' index='0' name='mLastResetPositionInFile' type='q'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMLoopCount:'>
+<arg declared_type='int' index='0' name='mLoopCount' type='i'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMTotalFramesConsumed:'>
+<arg declared_type='SInt64' index='0' name='mTotalFramesConsumed' type='q'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMTotalFramesGenerated:'>
+<arg declared_type='SInt64' index='0' name='mTotalFramesGenerated' type='q'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMTotalFramesPlayed:'>
+<arg declared_type='SInt64' index='0' name='mTotalFramesPlayed' type='q'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setMVolume:'>
+<arg declared_type='float' index='0' name='mVolume' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setNumberOfLoops:'>
+<arg declared_type='NSInteger' index='0' name='loops' type='i' type64='q'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setVolume:'>
+<arg declared_type='float' index='0' name='volume' type='f'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='stop'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='stopAll:'>
+<arg declared_type='id' index='0' name='param' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='stopProcessing'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='triggerPlay:'>
+<arg declared_type='id' index='0' name='param' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='updateMeters'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='url'>
+<retval declared_type='NSURL*' type='@'/>
+</method>
+<method selector='volume'>
+<retval declared_type='float' type='f'/>
+</method>
+</class>
+<class name='DiracFxAudioPlayer'>
+<method selector='loopBack'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='processAudioThread:'>
+<arg declared_type='id' index='0' name='param' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='resetProcessing:'>
+<arg declared_type='SInt64' index='0' name='position' type='q'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='EAFRead'>
+<method selector='closeFile'>
+<retval declared_type='OSStatus' type='l' type64='i'/>
+</method>
+<method selector='copyFrames:error:'>
+<arg declared_type='SInt64*' index='0' name='numFrames' type='^q'/>
+<arg declared_type='OSStatus*' index='1' name='err' type='^i'/>
+<retval declared_type='SInt16*' type='^s'/>
+</method>
+<method selector='dealloc'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='fileNumFrames'>
+<retval declared_type='SInt64' type='q'/>
+</method>
+<method selector='isSeeking'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='openFileForRead:sr:channels:'>
+<arg declared_type='NSURL*' index='0' name='fileURL' type='@'/>
+<arg declared_type='Float64' index='1' name='sampleRate' type='d'/>
+<arg declared_type='int' index='2' name='numChannels' type='i'/>
+<retval declared_type='OSStatus' type='l' type64='i'/>
+</method>
+<method selector='pullNewSamplesFromAsset:'>
+<arg declared_type='AVAssetReaderOutput*' index='0' name='assetOutput' type='@'/>
+<retval declared_type='long' type='l' type64='q'/>
+</method>
+<method selector='readFloatsConsecutive:intoArray:'>
+<arg declared_type='SInt64' index='0' name='numFrames' type='q'/>
+<arg declared_type='float**' index='1' name='audio' type='^^f'/>
+<retval declared_type='OSStatus' type='l' type64='i'/>
+</method>
+<method selector='readFloatsConsecutive:intoArray:withOffset:'>
+<arg declared_type='SInt64' index='0' name='numFrames' type='q'/>
+<arg declared_type='float**' index='1' name='audio' type='^^f'/>
+<arg declared_type='long' index='2' name='offset' type='l' type64='q'/>
+<retval declared_type='OSStatus' type='l' type64='i'/>
+</method>
+<method selector='readSInt16Consecutive:intoArray:'>
+<arg declared_type='SInt64' index='0' name='numFrames' type='q'/>
+<arg declared_type='SInt16**' index='1' name='audio' type='^^s'/>
+<retval declared_type='OSStatus' type='l' type64='i'/>
+</method>
+<method selector='readSInt16Consecutive:intoArray:withOffset:'>
+<arg declared_type='SInt64' index='0' name='numFrames' type='q'/>
+<arg declared_type='SInt16**' index='1' name='audio' type='^^s'/>
+<arg declared_type='long' index='2' name='offset' type='l' type64='q'/>
+<retval declared_type='OSStatus' type='l' type64='i'/>
+</method>
+<method selector='sampleRate'>
+<retval declared_type='Float64' type='d'/>
+</method>
+<method selector='seekToPercent:'>
+<arg declared_type='Float64' index='0' name='percent' type='d'/>
+<retval declared_type='OSStatus' type='l' type64='i'/>
+</method>
+<method selector='seekToStart'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='tell'>
+<retval declared_type='SInt64' type='q'/>
+</method>
+</class>
+<class name='EAFWrite'>
+<method selector='SetupStreamAndFileFormatForType:withSR:channels:wordlength:'>
+<arg declared_type='AudioFileTypeID' index='0' name='aftid' type='L' type64='I'/>
+<arg declared_type='float' index='1' name='sampleRate' type='f'/>
+<arg declared_type='long' index='2' name='numChannels' type='l' type64='q'/>
+<arg declared_type='long' index='3' name='numBits' type='l' type64='q'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='closeFile'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='openFileForWrite:sr:channels:wordLength:type:'>
+<arg declared_type='NSURL*' index='0' name='inPath' type='@'/>
+<arg declared_type='Float64' index='1' name='sampleRate' type='d'/>
+<arg declared_type='int' index='2' name='numChannels' type='i'/>
+<arg declared_type='int' index='3' name='numBits' type='i'/>
+<arg declared_type='AudioFileTypeID' index='4' name='aftid' type='L' type64='I'/>
+<retval declared_type='OSStatus' type='l' type64='i'/>
+</method>
+<method selector='writeFloats:fromArray:'>
+<arg declared_type='long' index='0' name='numFrames' type='l' type64='q'/>
+<arg declared_type='float**' index='1' name='data' type='^^f'/>
+<retval declared_type='OSStatus' type='l' type64='i'/>
+</method>
+<method selector='writeShorts:fromArray:'>
+<arg declared_type='long' index='0' name='numFrames' type='l' type64='q'/>
+<arg declared_type='short**' index='1' name='data' type='^^s'/>
+<retval declared_type='OSStatus' type='l' type64='i'/>
+</method>
+</class>
+<class name='NSObject'>
+<method selector='diracPlayerDidFinishPlaying:successfully:'>
+<arg declared_type='DiracAudioPlayerBase*' index='0' name='player' type='@'/>
+<arg declared_type='BOOL' index='1' name='flag' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<informal_protocol name='DiracAudioPlayerBaseDelegate'>
+<method selector='diracPlayerDidFinishPlaying:successfully:' type='v16@0:4@8B12' type64='v28@0:8@16B24'>
+<arg declared_type='DiracAudioPlayerBase*' index='0' name='player' type='@'/>
+<arg declared_type='BOOL' index='1' name='flag' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+</informal_protocol>
+</signatures>
